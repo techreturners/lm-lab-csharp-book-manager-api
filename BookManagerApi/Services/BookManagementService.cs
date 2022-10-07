@@ -2,8 +2,8 @@
 
 namespace BookManagerApi.Services
 {
-	public class BookManagementService : IBookManagementService
-	{
+    public class BookManagementService : IBookManagementService
+    {
         private readonly BookContext _context;
 
         public BookManagementService(BookContext context)
@@ -28,7 +28,7 @@ namespace BookManagerApi.Services
         public Book Update(long id, Book book)
         {
             var existingBookFound = FindBookById(id);
-           
+
             existingBookFound.Title = book.Title;
             existingBookFound.Description = book.Description;
             existingBookFound.Author = book.Author;

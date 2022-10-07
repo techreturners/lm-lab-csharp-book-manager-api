@@ -54,11 +54,11 @@ namespace BookManagerApi.Controllers
                 return Ok();
             else
                 return BadRequest();
+
         }
 
 
         // POST: api/v1/book
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public ActionResult<Book> AddBook(Book book)
         {
