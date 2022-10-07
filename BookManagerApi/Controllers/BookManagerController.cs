@@ -27,7 +27,10 @@ namespace BookManagerApi.Controllers
         public ActionResult<Book> GetBookById(long id)
         {
             var book = _bookManagementService.FindBookById(id);
-            return book;
+            if (book == null)
+                return NotFound();
+            else
+                return Ok(book);
         }
 
         // PUT: api/v1/book/5
@@ -35,9 +38,24 @@ namespace BookManagerApi.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateBookById(long id, Book book)
         {
+            if (!_bookManagementService.BookExists(id))
+                return NotFound();
+
             _bookManagementService.Update(id, book);
-            return NoContent();
+            return Ok();
         }
+
+
+        // Delete: api/v1/book/5
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBookById(long id)
+        {
+            if (_bookManagementService.Delete(id))
+                return Ok();
+            else
+                return BadRequest();
+        }
+
 
         // POST: api/v1/book
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

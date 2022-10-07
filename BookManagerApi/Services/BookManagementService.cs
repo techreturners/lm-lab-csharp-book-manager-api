@@ -28,7 +28,7 @@ namespace BookManagerApi.Services
         public Book Update(long id, Book book)
         {
             var existingBookFound = FindBookById(id);
-
+           
             existingBookFound.Title = book.Title;
             existingBookFound.Description = book.Description;
             existingBookFound.Author = book.Author;
@@ -36,6 +36,17 @@ namespace BookManagerApi.Services
 
             _context.SaveChanges();
             return book;
+        }
+
+        public bool Delete(long id)
+        {
+            var bookToBeRemoved = FindBookById(id);
+            if (bookToBeRemoved == null)
+                return false;
+
+            _context.Remove(bookToBeRemoved);
+            _context.SaveChanges();
+            return true;
         }
 
         public Book FindBookById(long id)
