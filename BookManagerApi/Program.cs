@@ -8,8 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IBookManagementService, BookManagementService>();
 builder.Services.AddControllers();
+
+var connectionString = builder.Configuration.GetConnectionString("BookManagerApi");
 builder.Services.AddDbContext<BookContext>(option =>
-    option.UseInMemoryDatabase("BookDb"));
+    option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Configure Swagger/OpenAPI Documentation
 // You can learn more on this link: https://aka.ms/aspnetcore/swashbuckle
