@@ -3,11 +3,12 @@ using BookManagerApi.Models;
 
 namespace BookManagerApi.Services
 {
-	public interface IBookManagementService
-	{
+    public interface IBookManagementService
+    {
         List<Book> GetAllBooks();
         Book Create(Book book);
         Book Update(long id, Book book);
+        bool Delete(long id);
         Book FindBookById(long id);
         bool BookExists(long id);
     }
