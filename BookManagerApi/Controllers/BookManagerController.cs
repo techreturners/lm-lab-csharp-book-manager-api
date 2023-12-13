@@ -62,9 +62,9 @@ namespace BookManagerApi.Controllers
         [HttpPost]
         public ActionResult<Book> AddBook(Book book)
         {
-            if(_bookManagementService.BookExists(book.Id))
-                return BadRequest(book);
-
+            //if(_bookManagementService.BookExists(book.Id))
+            //    return BadRequest(book);
+            book.Id = 0;
             _bookManagementService.Create(book);
             return CreatedAtAction(nameof(GetBookById), new { id = book.Id }, book);
         }
